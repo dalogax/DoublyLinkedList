@@ -1,4 +1,6 @@
-package com.dalogax.doublylinkedlist;
+package com.dalogax;
+
+import com.dalogax.doublylinkedlist.DoublyLinkedList;
 
 public class Main {
 
