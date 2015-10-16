@@ -12,6 +12,7 @@ public class DoublyLinkedList {
     private DoublyLinkedNode last;
 
     public DoublyLinkedList() {
+        first=last=null;
     }
 
     /*
@@ -64,23 +65,11 @@ public class DoublyLinkedList {
             throw new DoublyLinkedListException("The node does not exist in the list");
         }
     }
-    /*
-    Checks that the list contains a node
-     */
-    private boolean contains(DoublyLinkedNode node){
-        DoublyLinkedNode nodeCheck = first;
-        while (nodeCheck!=null){
-            if (nodeCheck==node){
-                return true;
-            }
-            node=node.getNext();
-        }
-        return false;
-    }
 
     public synchronized void removeFirst() throws DoublyLinkedListException {
         if (!isEmpty()){
             first=first.getNext();
+            first.setPrevious(null);
         }
         else{
             throw new DoublyLinkedListException("List is empty");
@@ -90,10 +79,25 @@ public class DoublyLinkedList {
     public synchronized void removeLast() throws DoublyLinkedListException {
         if (!isEmpty()){
             last=last.getPrevious();
+            last.setNext(null);
         }
         else{
             throw new DoublyLinkedListException("List is empty");
         }
+    }
+
+    /*
+    Checks that the list contains a node
+    */
+    private boolean contains(DoublyLinkedNode node){
+        DoublyLinkedNode nodeCheck = first;
+        while (nodeCheck!=null){
+            if (nodeCheck==node){
+                return true;
+            }
+            nodeCheck=nodeCheck.getNext();
+        }
+        return false;
     }
 
     public boolean isEmpty(){
