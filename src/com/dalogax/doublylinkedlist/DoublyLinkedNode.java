@@ -5,15 +5,21 @@ package com.dalogax.doublylinkedlist;
  * User: Daniel
  * Date: 16/10/15
  * Time: 16:33
- * To change this template use File | Settings | File Templates.
  */
 public class DoublyLinkedNode {
 
-    Object data;
-    DoublyLinkedNode next;
-    DoublyLinkedNode previous;
+    private Object data;
+    private DoublyLinkedNode next;
+    private DoublyLinkedNode previous;
 
-    public DoublyLinkedNode() {
+    public DoublyLinkedNode(Object data, DoublyLinkedNode next, DoublyLinkedNode previous) {
+        this.data = data;
+        this.next = next;
+        this.previous = previous;
+    }
+
+    public DoublyLinkedNode(Object data) {
+        this(data,null,null);
     }
 
     public Object getData() {
@@ -28,7 +34,6 @@ public class DoublyLinkedNode {
         return next;
     }
 
-    //Protected -> only this package manages the behaviour of the List
     protected void setNext(DoublyLinkedNode next) {
         this.next = next;
     }
@@ -37,7 +42,6 @@ public class DoublyLinkedNode {
         return previous;
     }
 
-    //Protected -> only this package manages the behaviour of the List
     protected void setPrevious(DoublyLinkedNode previous) {
         this.previous = previous;
     }
