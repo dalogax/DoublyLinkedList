@@ -15,17 +15,34 @@ public class DoublyLinkedList {
     }
 
     public void add(Object data){
-        DoublyLinkedNode newNode = new DoublyLinkedNode(data, null, last);
-        last.setNext(newNode);
-        last=newNode;
+        DoublyLinkedNode newNode = new DoublyLinkedNode(data);
+        if (isEmpty()) {
+            first=last=newNode;
+        }
+        else{
+            newNode.setPrevious(last);
+            last.setNext(newNode);
+            last=newNode;
+        }
     }
 
-    public void print(){
+    public boolean isEmpty(){
+        return first==null;
+    }
+
+    @Override
+    public String toString(){
+        String sList = "[";
         DoublyLinkedNode node = first;
         while (node!=null){
-            System.out.println(node.getData().toString());
+            sList+="{"+node.getData().toString()+"}";
+            if (node.getNext()!=null){
+                sList+=", ";
+            }
             node=node.getNext();
         }
+        sList+="]";
+        return sList;
     }
 
     public DoublyLinkedNode getFirst() {
