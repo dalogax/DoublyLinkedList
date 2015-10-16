@@ -8,5 +8,6 @@ package com.dalogax.doublylinkedlist;
  */
 public class DoublyLinkedListException extends Throwable {
     public DoublyLinkedListException(String s) {
+        super(s);
     }
 }

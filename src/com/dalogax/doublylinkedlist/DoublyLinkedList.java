@@ -68,8 +68,13 @@ public class DoublyLinkedList {
 
     public synchronized void removeFirst() throws DoublyLinkedListException {
         if (!isEmpty()){
-            first=first.getNext();
-            first.setPrevious(null);
+            if (first==last){
+                first=last=null;
+            }
+            else{
+                first=first.getNext();
+                first.setPrevious(null);
+            }
         }
         else{
             throw new DoublyLinkedListException("List is empty");
@@ -78,8 +83,13 @@ public class DoublyLinkedList {
 
     public synchronized void removeLast() throws DoublyLinkedListException {
         if (!isEmpty()){
-            last=last.getPrevious();
-            last.setNext(null);
+            if (first==last){
+                first=last=null;
+            }
+            else{
+                last=last.getPrevious();
+                last.setNext(null);
+            }
         }
         else{
             throw new DoublyLinkedListException("List is empty");

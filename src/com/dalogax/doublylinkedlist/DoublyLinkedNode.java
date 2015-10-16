@@ -50,4 +50,9 @@ public class DoublyLinkedNode {
     protected void setPrevious(DoublyLinkedNode previous) {
         this.previous = previous;
     }
+
+    @Override
+    public String toString() {
+        return data.toString();
+    }
 }
