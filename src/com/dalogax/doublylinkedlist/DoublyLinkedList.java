@@ -17,7 +17,7 @@ public class DoublyLinkedList {
     /*
     Insert a node in the first position
      */
-    public void insertFirst(Object data){
+    public synchronized void insertFirst(Object data){
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
@@ -32,7 +32,7 @@ public class DoublyLinkedList {
     /*
     Insert a node in the last position
      */
-    public void insertLast(Object data){
+    public synchronized void insertLast(Object data){
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
@@ -47,28 +47,53 @@ public class DoublyLinkedList {
     /*
     Remove a node from the list (the node must be on the list)
      */
-    public void remove(DoublyLinkedNode node){
-        /*TODO
-         Comprobar que el nodo pertenece a la lista
-         */
-        if (node==first){
-            removeFirst();
+    public synchronized void remove(DoublyLinkedNode node) throws DoublyLinkedListException {
+        if (contains(node)){
+            if (node==first){
+                removeFirst();
+            }
+            else if(node==last){
+                removeLast();
+            }
+            else{
+                node.getPrevious().setNext(node.getNext());
+                node.getNext().setPrevious(node.getPrevious());
+            }
         }
-        else if(node==last){
-            removeLast();
+        else {
+            throw new DoublyLinkedListException("The node does not exist in the list");
+        }
+    }
+    /*
+    Checks that the list contains a node
+     */
+    private boolean contains(DoublyLinkedNode node){
+        DoublyLinkedNode nodeCheck = first;
+        while (nodeCheck!=null){
+            if (nodeCheck==node){
+                return true;
+            }
+            node=node.getNext();
+        }
+        return false;
+    }
+
+    public synchronized void removeFirst() throws DoublyLinkedListException {
+        if (!isEmpty()){
+            first=first.getNext();
         }
         else{
-            node.getPrevious().setNext(node.getNext());
-            node.getNext().setPrevious(node.getPrevious());
+            throw new DoublyLinkedListException("List is empty");
         }
     }
 
-    public void removeFirst(){
-        first=first.getNext();
-    }
-
-    public void removeLast(){
-        last=last.getPrevious();
+    public synchronized void removeLast() throws DoublyLinkedListException {
+        if (!isEmpty()){
+            last=last.getPrevious();
+        }
+        else{
+            throw new DoublyLinkedListException("List is empty");
+        }
     }
 
     public boolean isEmpty(){
@@ -107,46 +132,4 @@ public class DoublyLinkedList {
     public DoublyLinkedNode getLast() {
         return last;
     }
-
-    class DoublyLinkedNode {
-
-        private Object data;
-        private DoublyLinkedNode next;
-        private DoublyLinkedNode previous;
-
-        public DoublyLinkedNode(Object data, DoublyLinkedNode next, DoublyLinkedNode previous) {
-            this.data = data;
-            this.next = next;
-            this.previous = previous;
-        }
-
-        public DoublyLinkedNode(Object data) {
-            this(data,null,null);
-        }
-
-        public Object getData() {
-            return data;
-        }
-
-        public void setData(Object data) {
-            this.data = data;
-        }
-
-        public DoublyLinkedNode getNext() {
-            return next;
-        }
-
-        protected void setNext(DoublyLinkedNode next) {
-            this.next = next;
-        }
-
-        public DoublyLinkedNode getPrevious() {
-            return previous;
-        }
-
-        protected void setPrevious(DoublyLinkedNode previous) {
-            this.previous = previous;
-        }
-    }
-
 }
