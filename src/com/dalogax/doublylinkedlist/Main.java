@@ -5,10 +5,13 @@ public class Main {
     public static void main(String[] args) {
 	    DoublyLinkedList list = new DoublyLinkedList();
         System.out.println(list.toString());
-        list.add(1);
+        list.insertLast(1);
         System.out.println(list.toString());
-        list.add("dos");
-        list.add(new Double(3.0));
+        list.insertLast("dos");
+        list.insertLast(new Double(3.0));
+        System.out.println(list.toString());
+        System.out.println("size: " + list.size());
+        list.insertFirst(0);
         System.out.println(list.toString());
     }
 

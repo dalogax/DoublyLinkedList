@@ -14,7 +14,25 @@ public class DoublyLinkedList {
     public DoublyLinkedList() {
     }
 
-    public void add(Object data){
+    /*
+    Insert a node in the first position
+     */
+    public void insertFirst(Object data){
+        DoublyLinkedNode newNode = new DoublyLinkedNode(data);
+        if (isEmpty()) {
+            first=last=newNode;
+        }
+        else{
+            newNode.setNext(first);
+            first.setPrevious(newNode);
+            first=newNode;
+        }
+    }
+
+    /*
+    Insert a node in the last position
+     */
+    public void insertLast(Object data){
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
@@ -26,8 +44,45 @@ public class DoublyLinkedList {
         }
     }
 
+    /*
+    Remove a node from the list (the node must be on the list)
+     */
+    public void remove(DoublyLinkedNode node){
+        /*TODO
+         Comprobar que el nodo pertenece a la lista
+         */
+        if (node==first){
+            removeFirst();
+        }
+        else if(node==last){
+            removeLast();
+        }
+        else{
+            node.getPrevious().setNext(node.getNext());
+            node.getNext().setPrevious(node.getPrevious());
+        }
+    }
+
+    public void removeFirst(){
+        first=first.getNext();
+    }
+
+    public void removeLast(){
+        last=last.getPrevious();
+    }
+
     public boolean isEmpty(){
         return first==null;
+    }
+
+    public int size(){
+        int size = 0;
+        DoublyLinkedNode node = first;
+        while (node!=null){
+            size++;
+            node=node.getNext();
+        }
+        return size;
     }
 
     @Override
