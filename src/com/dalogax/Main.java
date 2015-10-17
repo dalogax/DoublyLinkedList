@@ -32,5 +32,21 @@ public class Main {
         } catch (DoublyLinkedListException e) {
             System.out.println("ERROR: "+e.toString());
         }
+        try {
+            list.get(1);
+        } catch (DoublyLinkedListException e) {
+            System.out.println("ERROR: "+e.toString());
+        }
+        list.insertLast("New");
+        try {
+            System.out.println(list.get(0));
+        } catch (DoublyLinkedListException e) {
+            System.out.println("ERROR: "+e.toString());
+        }
+        System.out.println(list.getPos(list.getFirst()));
+
+
+
+
     }
 }
