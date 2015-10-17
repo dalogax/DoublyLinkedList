@@ -1,12 +1,16 @@
 package com.dalogax.doublylinkedlist;
 
+import java.io.Serializable;
+import java.util.AbstractList;
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Daniel
  * Date: 16/10/15
  * Time: 16:33
  */
-public class DoublyLinkedList<E> {
+public class DoublyLinkedList<E> extends AbstractList /*implements List, Cloneable, Serializable*/ {
 
     private DoublyLinkedNode first;
     private DoublyLinkedNode last;
@@ -121,7 +125,8 @@ public class DoublyLinkedList<E> {
     /*
     Returns the element in the n position of the list
      */
-    public DoublyLinkedNode get(int i) throws DoublyLinkedListException {
+    @Override
+    public DoublyLinkedNode get(int i) throws IndexOutOfBoundsException {
         int pos = 0;
         DoublyLinkedNode node = first;
         while (node!=null){
@@ -131,7 +136,7 @@ public class DoublyLinkedList<E> {
             pos++;
             node=node.getNext();
         }
-        throw new DoublyLinkedListException("The position selected is out of bounds");
+        throw new IndexOutOfBoundsException("The position selected is out of bounds");
     }
 
     /*
