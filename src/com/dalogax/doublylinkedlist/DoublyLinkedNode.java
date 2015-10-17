@@ -7,19 +7,19 @@ package com.dalogax.doublylinkedlist;
  * Time: 17:59
  */
 
-public class DoublyLinkedNode {
+public class DoublyLinkedNode<E> {
 
-    private Object data;
+    private E data;
     private DoublyLinkedNode next;
     private DoublyLinkedNode previous;
 
-    protected DoublyLinkedNode(Object data, DoublyLinkedNode next, DoublyLinkedNode previous) {
+    protected DoublyLinkedNode(E data, DoublyLinkedNode next, DoublyLinkedNode previous) {
         this.data = data;
         this.next = next;
         this.previous = previous;
     }
 
-    protected DoublyLinkedNode(Object data) {
+    protected DoublyLinkedNode(E data) {
         this(data,null,null);
     }
 
@@ -35,11 +35,11 @@ public class DoublyLinkedNode {
         return next==null;
     }
 
-    public Object getData() {
+    public E getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(E data) {
         this.data = data;
     }
 

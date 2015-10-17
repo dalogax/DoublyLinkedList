@@ -6,7 +6,7 @@ import com.dalogax.doublylinkedlist.DoublyLinkedListException;
 public class Main {
 
     public static void main(String[] args) throws DoublyLinkedListException{
-	    DoublyLinkedList list = new DoublyLinkedList();
+	    DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         System.out.println(list.toString());
         list.insertLast(1);
         System.out.println(list.toString());
@@ -37,16 +37,14 @@ public class Main {
         } catch (DoublyLinkedListException e) {
             System.out.println("ERROR: "+e.toString());
         }
-        list.insertLast("New");
+        //list2 type string
+        DoublyLinkedList<String> list2=new DoublyLinkedList<String>();
+        list2.insertLast("New");
         try {
-            System.out.println(list.get(0));
+            System.out.println(list2.get(0));
         } catch (DoublyLinkedListException e) {
             System.out.println("ERROR: "+e.toString());
         }
-        System.out.println(list.getPos(list.getFirst()));
-
-
-
-
+        System.out.println(list2.getPos(list2.getFirst()));
     }
 }

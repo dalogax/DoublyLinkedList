@@ -6,7 +6,7 @@ package com.dalogax.doublylinkedlist;
  * Date: 16/10/15
  * Time: 16:33
  */
-public class DoublyLinkedList {
+public class DoublyLinkedList<E> {
 
     private DoublyLinkedNode first;
     private DoublyLinkedNode last;
@@ -18,7 +18,7 @@ public class DoublyLinkedList {
     /*
     Insert a node in the first position
      */
-    public synchronized void insertFirst(Object data){
+    public synchronized void insertFirst(E data){
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
@@ -33,7 +33,7 @@ public class DoublyLinkedList {
     /*
     Insert a node in the last position
      */
-    public synchronized void insertLast(Object data){
+    public synchronized void insertLast(E data){
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
