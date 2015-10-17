@@ -27,6 +27,14 @@ public class DoublyLinkedNode {
         this(null,null,null);
     }
 
+    public boolean isFirst(){
+        return previous==null;
+    }
+
+    public boolean isLast(){
+        return next==null;
+    }
+
     public Object getData() {
         return data;
     }

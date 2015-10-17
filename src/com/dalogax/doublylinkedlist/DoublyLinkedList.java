@@ -62,7 +62,7 @@ public class DoublyLinkedList {
             }
         }
         else {
-            throw new DoublyLinkedListException("The node does not exist in the list");
+            throw new DoublyLinkedListException("The node is not in the list");
         }
     }
 
@@ -110,6 +110,46 @@ public class DoublyLinkedList {
         return false;
     }
 
+    public DoublyLinkedNode getFirst() {
+        return first;
+    }
+
+    public DoublyLinkedNode getLast() {
+        return last;
+    }
+
+    /*
+    Returns the element in the n position of the list
+     */
+    public DoublyLinkedNode get(int i) throws DoublyLinkedListException {
+        int pos = 0;
+        DoublyLinkedNode node = first;
+        while (node!=null){
+            if (i==pos){
+                return node;
+            }
+            pos++;
+            node=node.getNext();
+        }
+        throw new DoublyLinkedListException("The position selected is out of bounds");
+    }
+
+    /*
+    Returns the position of the node in the list
+     */
+    public int getPos(DoublyLinkedNode n) throws DoublyLinkedListException {
+        int pos = 0;
+        DoublyLinkedNode node = first;
+        while (node!=null){
+            if (node==n){
+                return pos;
+            }
+            pos++;
+            node=node.getNext();
+        }
+        throw new DoublyLinkedListException("The node is not in the list");
+    }
+
     public boolean isEmpty(){
         return first==null;
     }
@@ -137,13 +177,5 @@ public class DoublyLinkedList {
         }
         sList+="]";
         return sList;
-    }
-
-    public DoublyLinkedNode getFirst() {
-        return first;
-    }
-
-    public DoublyLinkedNode getLast() {
-        return last;
     }
 }
