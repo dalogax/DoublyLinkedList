@@ -17,7 +17,7 @@ public class DoublyLinkedList<E> {
         first = last = null;
     }
 
-    /*
+    /***
      * Insert a node in the first position
      * @param data The element
      */
@@ -32,7 +32,7 @@ public class DoublyLinkedList<E> {
         }
     }
 
-    /*
+    /***
      * Insert a node in the last position
      * @param data The element
      */
@@ -47,7 +47,7 @@ public class DoublyLinkedList<E> {
         }
     }
 
-    /*
+    /***
      * Remove a node from the list (the node must be on the list)
      * @param node The node
      * @throws DoublyLinkedListException if the parameter is null
@@ -93,7 +93,7 @@ public class DoublyLinkedList<E> {
         }
     }
 
-    /*
+    /***
     * Checks that the list contains a node
     * @param node The node
     */
@@ -108,7 +108,7 @@ public class DoublyLinkedList<E> {
         return false;
     }
 
-    /*
+    /***
      * Checks that the list contains a node with an element
      * @param element The element
      */
@@ -137,7 +137,7 @@ public class DoublyLinkedList<E> {
         return last;
     }
 
-    /*
+    /***
      * Returns the element in the n position of the list
      * @param i The index
      */
@@ -154,7 +154,7 @@ public class DoublyLinkedList<E> {
         throw new IndexOutOfBoundsException("The position selected is out of bounds");
     }
 
-    /*
+    /***
      * Returns the position of the node in the list
      * @param node The node
      */
