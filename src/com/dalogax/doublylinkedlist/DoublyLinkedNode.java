@@ -61,11 +61,6 @@ public class DoublyLinkedNode<E> {
 
     @Override
     public String toString() {
-        if (data!=null){
-            return data.toString();
-        }
-        else{
-            return "null";
-        }
+        return String.valueOf(data.toString());
     }
 }

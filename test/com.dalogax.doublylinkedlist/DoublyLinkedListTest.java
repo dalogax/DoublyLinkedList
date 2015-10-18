@@ -68,7 +68,7 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void getAndGetPosTest() {
+    public void getAndIndexOfTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
         try {
             list.insertLast(0);
@@ -76,7 +76,7 @@ public class DoublyLinkedListTest {
             list.insertLast(2);
             list.insertLast(3);
             DoublyLinkedNode node = list.get(2);
-            assertEquals(list.getPos(node), 2);
+            assertEquals(list.indexOf(node), 2);
             assertEquals(node.getData(), 2);
         } catch (DoublyLinkedListException e) {
             fail("ERROR:" + e.toString());
@@ -84,12 +84,12 @@ public class DoublyLinkedListTest {
     }
 
     @Test(expected = DoublyLinkedListException.class)
-    public void getPosExceptionTest() throws DoublyLinkedListException {
+    public void indexOfExceptionTest() throws DoublyLinkedListException {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
         list.insertLast(1);
         DoublyLinkedNode node = list.getFirst();
         list.removeLast();
-        list.getPos(node);
+        list.indexOf(node);
         fail("ERROR: shouldnt reach here");
     }
 

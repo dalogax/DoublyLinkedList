@@ -158,7 +158,7 @@ public class DoublyLinkedList<E> {
      * Returns the position of the node in the list
      * @param node The node
      */
-    public int getPos(DoublyLinkedNode<E> n) throws DoublyLinkedListException {
+    public int indexOf(DoublyLinkedNode<E> n) throws DoublyLinkedListException {
         int pos = 0;
         DoublyLinkedNode<E> node = first;
         while (node != null) {
