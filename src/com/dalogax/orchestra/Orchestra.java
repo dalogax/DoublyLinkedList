@@ -52,8 +52,8 @@ public class Orchestra {
     private static void assignSits(Integer nSits, Integer selectedSit) throws DoublyLinkedListException {
         DoublyLinkedList<Sit> row = orchestra.get((selectedSit/columns)%rows);
         DoublyLinkedNode<Sit> node = row.get((selectedSit%columns)-1);
-        DoublyLinkedNode<Sit> nodeBack;
-        DoublyLinkedNode<Sit> nodeForward;
+        DoublyLinkedNode<Sit> nodeBack = node;
+        DoublyLinkedNode<Sit> nodeForward = node;
         DoublyLinkedList<Integer> assigned = new DoublyLinkedList<Integer>();
         boolean backBloqued = false;
         boolean forwardBloqued = false;
@@ -63,7 +63,7 @@ public class Orchestra {
             nSits--;
             while(nSits>0 && (!backBloqued || !forwardBloqued)){
                 if (!backBloqued){
-                    nodeBack = node.getPrevious();
+                    nodeBack = nodeBack.getPrevious();
                     if (nodeBack!=null && !nodeBack.getData().isOccupied()){
                         nodeBack.getData().setOccupied(true);
                         assigned.insertFirst(nodeBack.getData().getId());
@@ -74,7 +74,7 @@ public class Orchestra {
                     }
                 }
                 if (!forwardBloqued && nSits>0){
-                    nodeForward = node.getNext();
+                    nodeForward = nodeForward.getNext();
                     if (nodeForward!=null && !nodeForward.getData().isOccupied()){
                         nodeForward.getData().setOccupied(true);
                         assigned.insertLast(nodeForward.getData().getId());
