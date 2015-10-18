@@ -11,7 +11,7 @@ public class Sit {
     private int id;
 
     public Sit() {
-        occupied=false;
+        occupied = false;
     }
 
     public Sit(boolean occupied, int id) {
