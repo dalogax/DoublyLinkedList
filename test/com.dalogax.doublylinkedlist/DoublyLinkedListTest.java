@@ -1,5 +1,6 @@
 package com.dalogax.doublylinkedlist;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.CaseInsensitiveMap;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -39,19 +40,30 @@ public class DoublyLinkedListTest {
 
     }
 
-    @Test(expected = DoublyLinkedListException.class)
-    public void insertFirstExceptionTest() throws DoublyLinkedListException {
+    @Test
+    public void insertIndexTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
-        list.insertFirst(null);
-        fail("ERROR: shouldnt reach here");
+        list.insertLast(1);
+        list.insertLast(3);
+        list.insert(2,1);
+        assertEquals(list.get(1).getData(),2);
+        assertEquals(list.get(2).getData(),3);
+        list.insert(4,2);
+        assertEquals(list.get(2).getData(),4);
+        list.insert(0,0);
+        assertEquals(list.get(0).getData(),0);
+        list.clear();
+        list.insert(0,0);
+        assertEquals(list.get(0).getData(),0);
     }
 
-    @Test(expected = DoublyLinkedListException.class)
-    public void insertLastExceptionTest() throws DoublyLinkedListException {
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void insertIndexExceptionTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
-        list.insertLast(null);
-        fail("ERROR: shouldnt reach here");
+            list.insertLast(1);
+            list.insert(2,1);
     }
+
 
     @Test(expected = DoublyLinkedListException.class)
     public void getFirstExceptionTest() throws DoublyLinkedListException {
@@ -70,17 +82,13 @@ public class DoublyLinkedListTest {
     @Test
     public void getAndIndexOfTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
-        try {
-            list.insertLast(0);
-            list.insertLast(1);
-            list.insertLast(2);
-            list.insertLast(3);
-            DoublyLinkedNode node = list.get(2);
-            assertEquals(list.indexOf(node), 2);
-            assertEquals(node.getData(), 2);
-        } catch (DoublyLinkedListException e) {
-            fail("ERROR:" + e.toString());
-        }
+        list.insertLast(0);
+        list.insertLast(1);
+        list.insertLast(2);
+        list.insertLast(3);
+        DoublyLinkedNode node = list.get(2);
+        assertEquals(list.indexOf(node), 2);
+        assertEquals(node.getData(), 2);
     }
 
     @Test(expected = DoublyLinkedListException.class)
@@ -121,23 +129,18 @@ public class DoublyLinkedListTest {
     @Test
     public void removeFirstAndLastTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
-        try {
-            list.insertLast(2);
-            list.removeFirst();
-            assertTrue(list.isEmpty());
-            list.insertFirst(1);
-            list.insertFirst(0);
-            list.removeLast();
-            assertEquals(list.size(), 1);
-            assertEquals(list.getFirst().getData(), 0);
-            list.insertLast(1);
-            assertEquals(list.size(), 2);
-            list.removeFirst();
-            assertEquals(list.size(), 1);
-        } catch (DoublyLinkedListException e) {
-            fail("ERROR:" + e.toString());
-        }
-
+        list.insertLast(2);
+        list.removeFirst();
+        assertTrue(list.isEmpty());
+        list.insertFirst(1);
+        list.insertFirst(0);
+        list.removeLast();
+        assertEquals(list.size(), 1);
+        assertEquals(list.getFirst().getData(), 0);
+        list.insertLast(1);
+        assertEquals(list.size(), 2);
+        list.removeFirst();
+        assertEquals(list.size(), 1);
     }
 
     @Test(expected = DoublyLinkedListException.class)
@@ -157,21 +160,16 @@ public class DoublyLinkedListTest {
     @Test
     public void removeTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
-        try {
-            list.insertLast(1);
-            list.insertLast(2);
-            list.insertLast(3);
-            assertEquals(list.size(), 3);
-            list.remove(list.get(1));
-            assertEquals(list.size(), 2);
-            list.remove(list.getLast());
-            assertEquals(list.size(), 1);
-            list.remove(list.getFirst());
-            assertTrue(list.isEmpty());
-        } catch (DoublyLinkedListException e) {
-            fail("ERROR:" + e.toString());
-        }
-
+        list.insertLast(1);
+        list.insertLast(2);
+        list.insertLast(3);
+        assertEquals(list.size(), 3);
+        list.remove(list.get(1));
+        assertEquals(list.size(), 2);
+        list.remove(list.getLast());
+        assertEquals(list.size(), 1);
+        list.remove(list.getFirst());
+        assertTrue(list.isEmpty());
     }
 
     @Test(expected = DoublyLinkedListException.class)
@@ -185,19 +183,24 @@ public class DoublyLinkedListTest {
     }
 
     @Test
+    public void removeIndexTest() throws DoublyLinkedListException {
+        DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
+        list.insertLast(1);
+        list.removeIndex(0);
+        assertTrue(list.isEmpty());
+
+    }
+
+    @Test
     public void containsTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
-        try {
-            list.insertLast(1);
-            list.insertLast(2);
-            list.insertLast(3);
-            list.insertLast(4);
-            assertTrue(list.contains(1));
-            list.removeFirst();
-            assertFalse(list.contains(6));
-        } catch (DoublyLinkedListException e) {
-            fail("ERROR:" + e.toString());
-        }
+        list.insertLast(1);
+        list.insertLast(2);
+        list.insertLast(3);
+        list.insertLast(4);
+        assertTrue(list.contains(1));
+        list.removeFirst();
+        assertFalse(list.contains(6));
     }
 
     @Test

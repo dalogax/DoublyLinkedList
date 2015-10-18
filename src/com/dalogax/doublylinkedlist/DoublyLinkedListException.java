@@ -6,7 +6,7 @@ package com.dalogax.doublylinkedlist;
  * Date: 16/10/15
  * Time: 18:08
  */
-public class DoublyLinkedListException extends Throwable {
+public class DoublyLinkedListException extends RuntimeException {
     public DoublyLinkedListException(String s) {
         super(s);
     }

@@ -1,7 +1,5 @@
 package com.dalogax.doublylinkedlist;
 
-import java.security.InvalidParameterException;
-
 /**
  * Created with IntelliJ IDEA.
  * User: dalogax@gmail.com
@@ -48,11 +46,35 @@ public class DoublyLinkedList<E> {
     }
 
     /***
+     * Insert a node in the index position
+     * @param data The element
+     * @param index The index
+     */
+    public synchronized void insert(E data, int index) {
+        DoublyLinkedNode<E> newNode = new DoublyLinkedNode<E>(data);
+        if (isEmpty()) {
+            first = last = newNode;
+        }
+        else if (index == 0){
+            insertFirst(data);
+        }
+        else if (index >= size()){
+            throw new IndexOutOfBoundsException();
+        } else {
+            DoublyLinkedNode<E> oldNode = get(index);
+            newNode.setPrevious(oldNode.getPrevious());
+            oldNode.getPrevious().setNext(newNode);
+            newNode.setNext(oldNode);
+            oldNode.setPrevious(newNode);
+        }
+    }
+
+    /***
      * Remove a node from the list (the node must be on the list)
      * @param node The node
      * @throws DoublyLinkedListException if the parameter is null
      */
-    public synchronized void remove(DoublyLinkedNode<E> node) throws DoublyLinkedListException {
+    public synchronized void remove(DoublyLinkedNode<E> node) {
         if (contains(node)) {
             if (node.isFirst()) {
                 removeFirst();
@@ -67,7 +89,7 @@ public class DoublyLinkedList<E> {
         }
     }
 
-    public synchronized void removeFirst() throws DoublyLinkedListException {
+    public synchronized void removeFirst() {
         if (!isEmpty()) {
             if (first == last) {
                 first = last = null;
@@ -80,7 +102,7 @@ public class DoublyLinkedList<E> {
         }
     }
 
-    public synchronized void removeLast() throws DoublyLinkedListException {
+    public synchronized void removeLast() {
         if (!isEmpty()) {
             if (first == last) {
                 first = last = null;
@@ -91,6 +113,10 @@ public class DoublyLinkedList<E> {
         } else {
             throw new DoublyLinkedListException("List is empty");
         }
+    }
+
+    public void removeIndex(int index) {
+        remove(get(index));
     }
 
     /***
@@ -123,14 +149,14 @@ public class DoublyLinkedList<E> {
         return false;
     }
 
-    public DoublyLinkedNode<E> getFirst() throws DoublyLinkedListException {
+    public DoublyLinkedNode<E> getFirst() {
         if (isEmpty()) {
             throw new DoublyLinkedListException("List is empty");
         }
         return first;
     }
 
-    public DoublyLinkedNode<E> getLast() throws DoublyLinkedListException {
+    public DoublyLinkedNode<E> getLast() {
         if (isEmpty()) {
             throw new DoublyLinkedListException("List is empty");
         }
@@ -141,7 +167,7 @@ public class DoublyLinkedList<E> {
      * Returns the element in the n position of the list
      * @param index The index
      */
-    public DoublyLinkedNode<E> get(int index) throws IndexOutOfBoundsException {
+    public DoublyLinkedNode<E> get(int index) {
         int pos = 0;
         DoublyLinkedNode<E> node = first;
         while (node != null) {
@@ -158,7 +184,7 @@ public class DoublyLinkedList<E> {
      * Returns the position of the node in the list
      * @param node The node
      */
-    public int indexOf(DoublyLinkedNode<E> node) throws DoublyLinkedListException {
+    public int indexOf(DoublyLinkedNode<E> node) {
         int pos = 0;
         DoublyLinkedNode<E> nodeSearch = first;
         while (nodeSearch != null) {
