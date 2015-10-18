@@ -139,9 +139,9 @@ public class DoublyLinkedList<E> {
 
     /***
      * Returns the element in the n position of the list
-     * @param i The index
+     * @param index The index
      */
-    public DoublyLinkedNode<E> get(int i) throws IndexOutOfBoundsException {
+    public DoublyLinkedNode<E> get(int index) throws IndexOutOfBoundsException {
         int pos = 0;
         DoublyLinkedNode<E> node = first;
         while (node != null) {
@@ -158,15 +158,15 @@ public class DoublyLinkedList<E> {
      * Returns the position of the node in the list
      * @param node The node
      */
-    public int indexOf(DoublyLinkedNode<E> n) throws DoublyLinkedListException {
+    public int indexOf(DoublyLinkedNode<E> node) throws DoublyLinkedListException {
         int pos = 0;
-        DoublyLinkedNode<E> node = first;
-        while (node != null) {
-            if (node == n) {
+        DoublyLinkedNode<E> nodeSearch = first;
+        while (nodeSearch != null) {
+            if (nodeSearch == node) {
                 return pos;
             }
             pos++;
-            node = node.getNext();
+            nodeSearch = nodeSearch.getNext();
         }
         throw new DoublyLinkedListException("The node is not in the list");
     }
