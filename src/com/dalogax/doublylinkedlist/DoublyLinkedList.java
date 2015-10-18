@@ -56,10 +56,10 @@ public class DoublyLinkedList<E> {
      */
     public synchronized void remove(DoublyLinkedNode node) throws DoublyLinkedListException {
         if (contains(node)){
-            if (node==first){
+            if (node.isFirst()){
                 removeFirst();
             }
-            else if(node==last){
+            else if(node.isLast()){
                 removeLast();
             }
             else{
@@ -181,7 +181,7 @@ public class DoublyLinkedList<E> {
         String sList = "[";
         DoublyLinkedNode node = first;
         while (node!=null){
-            sList+="{"+node.getData().toString()+"}";
+            sList+="{"+node.toString()+"}";
             if (node.getNext()!=null){
                 sList+=", ";
             }
