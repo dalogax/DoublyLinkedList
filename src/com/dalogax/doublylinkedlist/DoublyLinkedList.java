@@ -1,16 +1,12 @@
 package com.dalogax.doublylinkedlist;
 
-import java.io.Serializable;
-import java.util.AbstractList;
-import java.util.List;
-
 /**
  * Created with IntelliJ IDEA.
- * User: Daniel
+ * User: dalogax@gmail.com
  * Date: 16/10/15
  * Time: 16:33
  */
-public class DoublyLinkedList<E> extends AbstractList /*implements List, Cloneable, Serializable*/ {
+public class DoublyLinkedList<E> {
 
     private DoublyLinkedNode first;
     private DoublyLinkedNode last;
@@ -22,7 +18,10 @@ public class DoublyLinkedList<E> extends AbstractList /*implements List, Cloneab
     /*
     Insert a node in the first position
      */
-    public synchronized void insertFirst(E data){
+    public synchronized void insertFirst(E data) throws DoublyLinkedListException {
+        if(data==null){
+            throw new DoublyLinkedListException("The object is null");
+        }
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
@@ -37,7 +36,10 @@ public class DoublyLinkedList<E> extends AbstractList /*implements List, Cloneab
     /*
     Insert a node in the last position
      */
-    public synchronized void insertLast(E data){
+    public synchronized void insertLast(E data) throws DoublyLinkedListException {
+        if(data==null){
+            throw new DoublyLinkedListException("The object is null");
+        }
         DoublyLinkedNode newNode = new DoublyLinkedNode(data);
         if (isEmpty()) {
             first=last=newNode;
@@ -103,7 +105,7 @@ public class DoublyLinkedList<E> extends AbstractList /*implements List, Cloneab
     /*
     Checks that the list contains a node
     */
-    private boolean contains(DoublyLinkedNode node){
+    public boolean contains(DoublyLinkedNode node){
         DoublyLinkedNode nodeCheck = first;
         while (nodeCheck!=null){
             if (nodeCheck==node){
@@ -114,18 +116,23 @@ public class DoublyLinkedList<E> extends AbstractList /*implements List, Cloneab
         return false;
     }
 
-    public DoublyLinkedNode getFirst() {
+    public DoublyLinkedNode getFirst() throws DoublyLinkedListException {
+        if(isEmpty()){
+            throw new DoublyLinkedListException("List is empty");
+        }
         return first;
     }
 
-    public DoublyLinkedNode getLast() {
+    public DoublyLinkedNode getLast() throws DoublyLinkedListException {
+        if(isEmpty()){
+            throw new DoublyLinkedListException("List is empty");
+        }
         return last;
     }
 
     /*
     Returns the element in the n position of the list
      */
-    @Override
     public DoublyLinkedNode get(int i) throws IndexOutOfBoundsException {
         int pos = 0;
         DoublyLinkedNode node = first;

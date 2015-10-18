@@ -2,7 +2,7 @@ package com.dalogax.doublylinkedlist;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Daniel
+ * User: dalogax@gmail.com
  * Date: 16/10/15
  * Time: 18:08
  */
