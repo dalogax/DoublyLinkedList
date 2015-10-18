@@ -1,10 +1,5 @@
 package com.dalogax.doublylinkedlist;
 
-
-import com.dalogax.doublylinkedlist.DoublyLinkedList;
-
-import com.dalogax.doublylinkedlist.DoublyLinkedListException;
-import com.dalogax.doublylinkedlist.DoublyLinkedNode;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -18,7 +13,7 @@ import static org.junit.Assert.*;
 public class DoublyLinkedListTest {
 
     @Test
-    public void getDataTest(){
+    public void getDataTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
         Integer i = 1;
         try {
@@ -31,7 +26,7 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void insertAndGetFirstLastTest(){
+    public void insertAndGetFirstLastTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
         try {
             list.insertLast(1);
@@ -73,7 +68,7 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void getAndGetPosTest(){
+    public void getAndGetPosTest() {
         DoublyLinkedList<Integer> list = new DoublyLinkedList<Integer>();
         try {
             list.insertLast(0);
@@ -82,9 +77,9 @@ public class DoublyLinkedListTest {
             list.insertLast(3);
             DoublyLinkedNode node = list.get(2);
             assertEquals(list.getPos(node), 2);
-            assertEquals(node.getData(),2);
+            assertEquals(node.getData(), 2);
         } catch (DoublyLinkedListException e) {
-            fail("ERROR:"+e.toString());
+            fail("ERROR:" + e.toString());
         }
     }
 
@@ -106,9 +101,9 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void objectListAndSizeTest(){
+    public void objectListAndSizeTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
-        assertEquals(list.size(),0);
+        assertEquals(list.size(), 0);
         try {
             list.insertLast(1);
             list.insertLast("dos");
@@ -117,11 +112,11 @@ public class DoublyLinkedListTest {
             fail("ERROR:" + e.toString());
         }
 
-        assertEquals(list.size(),3);
+        assertEquals(list.size(), 3);
     }
 
     @Test
-    public void isEmptyTest(){
+    public void isEmptyTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         assertTrue(list.isEmpty());
         try {
@@ -133,7 +128,7 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void removeFirstAndLastTest(){
+    public void removeFirstAndLastTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         try {
             list.insertLast(2);
@@ -143,7 +138,7 @@ public class DoublyLinkedListTest {
             list.insertFirst(0);
             list.removeLast();
             assertEquals(list.size(), 1);
-            assertEquals(list.getFirst().getData(),0);
+            assertEquals(list.getFirst().getData(), 0);
             list.insertLast(1);
             assertEquals(list.size(), 2);
             list.removeFirst();
@@ -155,7 +150,7 @@ public class DoublyLinkedListTest {
     }
 
     @Test(expected = DoublyLinkedListException.class)
-     public void removeFirstExceptionTest() throws DoublyLinkedListException {
+    public void removeFirstExceptionTest() throws DoublyLinkedListException {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         list.removeFirst();
         fail("ERROR: shouldnt reach here");
@@ -169,17 +164,17 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void removeTest(){
+    public void removeTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         try {
             list.insertLast(1);
             list.insertLast(2);
             list.insertLast(3);
-            assertEquals(list.size(),3);
+            assertEquals(list.size(), 3);
             list.remove(list.get(1));
-            assertEquals(list.size(),2);
+            assertEquals(list.size(), 2);
             list.remove(list.getLast());
-            assertEquals(list.size(),1) ;
+            assertEquals(list.size(), 1);
             list.remove(list.getFirst());
             assertTrue(list.isEmpty());
         } catch (DoublyLinkedListException e) {
@@ -199,7 +194,7 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void containsTest(){
+    public void containsTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         try {
             list.insertLast(1);
@@ -215,13 +210,13 @@ public class DoublyLinkedListTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         DoublyLinkedList<Object> list = new DoublyLinkedList<Object>();
         try {
             list.insertLast(1);
             list.insertLast("dos");
             list.insertLast(new Double(3.0));
-            assertEquals(list.toString(),"[{1}, {dos}, {3.0}]");
+            assertEquals(list.toString(), "[{1}, {dos}, {3.0}]");
         } catch (DoublyLinkedListException e) {
             fail("ERROR:" + e.toString());
         }

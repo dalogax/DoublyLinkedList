@@ -8,28 +8,27 @@ package com.dalogax.doublylinkedlist;
  */
 public class DoublyLinkedList<E> {
 
-    private DoublyLinkedNode first;
-    private DoublyLinkedNode last;
+    private DoublyLinkedNode<E> first;
+    private DoublyLinkedNode<E> last;
 
     public DoublyLinkedList() {
-        first=last=null;
+        first = last = null;
     }
 
     /*
     Insert a node in the first position
      */
     public synchronized void insertFirst(E data) throws DoublyLinkedListException {
-        if(data==null){
+        if (data == null) {
             throw new DoublyLinkedListException("The object is null");
         }
-        DoublyLinkedNode newNode = new DoublyLinkedNode(data);
+        DoublyLinkedNode<E> newNode = new DoublyLinkedNode<E>(data);
         if (isEmpty()) {
-            first=last=newNode;
-        }
-        else{
+            first = last = newNode;
+        } else {
             newNode.setNext(first);
             first.setPrevious(newNode);
-            first=newNode;
+            first = newNode;
         }
     }
 
@@ -37,67 +36,59 @@ public class DoublyLinkedList<E> {
     Insert a node in the last position
      */
     public synchronized void insertLast(E data) throws DoublyLinkedListException {
-        if(data==null){
+        if (data == null) {
             throw new DoublyLinkedListException("The object is null");
         }
-        DoublyLinkedNode newNode = new DoublyLinkedNode(data);
+        DoublyLinkedNode<E> newNode = new DoublyLinkedNode<E>(data);
         if (isEmpty()) {
-            first=last=newNode;
-        }
-        else{
+            first = last = newNode;
+        } else {
             newNode.setPrevious(last);
             last.setNext(newNode);
-            last=newNode;
+            last = newNode;
         }
     }
 
     /*
     Remove a node from the list (the node must be on the list)
      */
-    public synchronized void remove(DoublyLinkedNode node) throws DoublyLinkedListException {
-        if (contains(node)){
-            if (node.isFirst()){
+    public synchronized void remove(DoublyLinkedNode<E> node) throws DoublyLinkedListException {
+        if (contains(node)) {
+            if (node.isFirst()) {
                 removeFirst();
-            }
-            else if(node.isLast()){
+            } else if (node.isLast()) {
                 removeLast();
-            }
-            else{
+            } else {
                 node.getPrevious().setNext(node.getNext());
                 node.getNext().setPrevious(node.getPrevious());
             }
-        }
-        else {
+        } else {
             throw new DoublyLinkedListException("The node is not in the list");
         }
     }
 
     public synchronized void removeFirst() throws DoublyLinkedListException {
-        if (!isEmpty()){
-            if (first==last){
-                first=last=null;
-            }
-            else{
-                first=first.getNext();
+        if (!isEmpty()) {
+            if (first == last) {
+                first = last = null;
+            } else {
+                first = first.getNext();
                 first.setPrevious(null);
             }
-        }
-        else{
+        } else {
             throw new DoublyLinkedListException("List is empty");
         }
     }
 
     public synchronized void removeLast() throws DoublyLinkedListException {
-        if (!isEmpty()){
-            if (first==last){
-                first=last=null;
-            }
-            else{
-                last=last.getPrevious();
+        if (!isEmpty()) {
+            if (first == last) {
+                first = last = null;
+            } else {
+                last = last.getPrevious();
                 last.setNext(null);
             }
-        }
-        else{
+        } else {
             throw new DoublyLinkedListException("List is empty");
         }
     }
@@ -105,13 +96,13 @@ public class DoublyLinkedList<E> {
     /*
     Checks that the list contains a node
     */
-    private boolean contains(DoublyLinkedNode node){
-        DoublyLinkedNode nodeCheck = first;
-        while (nodeCheck!=null){
-            if (nodeCheck==node){
+    private boolean contains(DoublyLinkedNode<E> node) {
+        DoublyLinkedNode<E> nodeCheck = first;
+        while (nodeCheck != null) {
+            if (nodeCheck == node) {
                 return true;
             }
-            nodeCheck=nodeCheck.getNext();
+            nodeCheck = nodeCheck.getNext();
         }
         return false;
     }
@@ -119,26 +110,26 @@ public class DoublyLinkedList<E> {
     /*
    Checks that the list contains a node with an element
    */
-    public boolean contains(E element){
-        DoublyLinkedNode nodeCheck = first;
-        while (nodeCheck!=null){
-            if (nodeCheck.getData().equals(element)){
+    public boolean contains(E element) {
+        DoublyLinkedNode<E> nodeCheck = first;
+        while (nodeCheck != null) {
+            if (nodeCheck.getData().equals(element)) {
                 return true;
             }
-            nodeCheck=nodeCheck.getNext();
+            nodeCheck = nodeCheck.getNext();
         }
         return false;
     }
 
-    public DoublyLinkedNode getFirst() throws DoublyLinkedListException {
-        if(isEmpty()){
+    public DoublyLinkedNode<E> getFirst() throws DoublyLinkedListException {
+        if (isEmpty()) {
             throw new DoublyLinkedListException("List is empty");
         }
         return first;
     }
 
-    public DoublyLinkedNode getLast() throws DoublyLinkedListException {
-        if(isEmpty()){
+    public DoublyLinkedNode<E> getLast() throws DoublyLinkedListException {
+        if (isEmpty()) {
             throw new DoublyLinkedListException("List is empty");
         }
         return last;
@@ -147,15 +138,15 @@ public class DoublyLinkedList<E> {
     /*
     Returns the element in the n position of the list
      */
-    public DoublyLinkedNode get(int i) throws IndexOutOfBoundsException {
+    public DoublyLinkedNode<E> get(int i) throws IndexOutOfBoundsException {
         int pos = 0;
-        DoublyLinkedNode node = first;
-        while (node!=null){
-            if (i==pos){
+        DoublyLinkedNode<E> node = first;
+        while (node != null) {
+            if (i == pos) {
                 return node;
             }
             pos++;
-            node=node.getNext();
+            node = node.getNext();
         }
         throw new IndexOutOfBoundsException("The position selected is out of bounds");
     }
@@ -163,45 +154,45 @@ public class DoublyLinkedList<E> {
     /*
     Returns the position of the node in the list
      */
-    public int getPos(DoublyLinkedNode n) throws DoublyLinkedListException {
+    public int getPos(DoublyLinkedNode<E> n) throws DoublyLinkedListException {
         int pos = 0;
-        DoublyLinkedNode node = first;
-        while (node!=null){
-            if (node==n){
+        DoublyLinkedNode<E> node = first;
+        while (node != null) {
+            if (node == n) {
                 return pos;
             }
             pos++;
-            node=node.getNext();
+            node = node.getNext();
         }
         throw new DoublyLinkedListException("The node is not in the list");
     }
 
-    public boolean isEmpty(){
-        return first==null;
+    public boolean isEmpty() {
+        return first == null;
     }
 
-    public int size(){
+    public int size() {
         int size = 0;
-        DoublyLinkedNode node = first;
-        while (node!=null){
+        DoublyLinkedNode<E> node = first;
+        while (node != null) {
             size++;
-            node=node.getNext();
+            node = node.getNext();
         }
         return size;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String sList = "[";
-        DoublyLinkedNode node = first;
-        while (node!=null){
-            sList+="{"+node.toString()+"}";
-            if (node.getNext()!=null){
-                sList+=", ";
+        DoublyLinkedNode<E> node = first;
+        while (node != null) {
+            sList += "{" + node.toString() + "}";
+            if (node.getNext() != null) {
+                sList += ", ";
             }
-            node=node.getNext();
+            node = node.getNext();
         }
-        sList+="]";
+        sList += "]";
         return sList;
     }
 }

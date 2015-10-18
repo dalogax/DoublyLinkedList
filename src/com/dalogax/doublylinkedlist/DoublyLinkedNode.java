@@ -10,29 +10,29 @@ package com.dalogax.doublylinkedlist;
 public class DoublyLinkedNode<E> {
 
     private E data;
-    private DoublyLinkedNode next;
-    private DoublyLinkedNode previous;
+    private DoublyLinkedNode<E> next;
+    private DoublyLinkedNode<E> previous;
 
-    protected DoublyLinkedNode(E data, DoublyLinkedNode next, DoublyLinkedNode previous) {
+    protected DoublyLinkedNode(E data, DoublyLinkedNode<E> next, DoublyLinkedNode<E> previous) {
         this.data = data;
         this.next = next;
         this.previous = previous;
     }
 
     protected DoublyLinkedNode(E data) {
-        this(data,null,null);
+        this(data, null, null);
     }
 
     protected DoublyLinkedNode() {
-        this(null,null,null);
+        this(null, null, null);
     }
 
-    public boolean isFirst(){
-        return previous==null;
+    public boolean isFirst() {
+        return previous == null;
     }
 
-    public boolean isLast(){
-        return next==null;
+    public boolean isLast() {
+        return next == null;
     }
 
     public E getData() {
@@ -47,7 +47,7 @@ public class DoublyLinkedNode<E> {
         return next;
     }
 
-    protected void setNext(DoublyLinkedNode next) {
+    protected void setNext(DoublyLinkedNode<E> next) {
         this.next = next;
     }
 
@@ -55,7 +55,7 @@ public class DoublyLinkedNode<E> {
         return previous;
     }
 
-    protected void setPrevious(DoublyLinkedNode previous) {
+    protected void setPrevious(DoublyLinkedNode<E> previous) {
         this.previous = previous;
     }
 
