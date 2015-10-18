@@ -1,5 +1,7 @@
 package com.dalogax.doublylinkedlist;
 
+import java.security.InvalidParameterException;
+
 /**
  * Created with IntelliJ IDEA.
  * User: dalogax@gmail.com
@@ -16,12 +18,10 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-    Insert a node in the first position
+     * Insert a node in the first position
+     * @param data The element
      */
-    public synchronized void insertFirst(E data) throws DoublyLinkedListException {
-        if (data == null) {
-            throw new DoublyLinkedListException("The object is null");
-        }
+    public synchronized void insertFirst(E data){
         DoublyLinkedNode<E> newNode = new DoublyLinkedNode<E>(data);
         if (isEmpty()) {
             first = last = newNode;
@@ -33,12 +33,10 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-    Insert a node in the last position
+     * Insert a node in the last position
+     * @param data The element
      */
-    public synchronized void insertLast(E data) throws DoublyLinkedListException {
-        if (data == null) {
-            throw new DoublyLinkedListException("The object is null");
-        }
+    public synchronized void insertLast(E data) {
         DoublyLinkedNode<E> newNode = new DoublyLinkedNode<E>(data);
         if (isEmpty()) {
             first = last = newNode;
@@ -50,7 +48,9 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-    Remove a node from the list (the node must be on the list)
+     * Remove a node from the list (the node must be on the list)
+     * @param node The node
+     * @throws DoublyLinkedListException if the parameter is null
      */
     public synchronized void remove(DoublyLinkedNode<E> node) throws DoublyLinkedListException {
         if (contains(node)) {
@@ -94,7 +94,8 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-    Checks that the list contains a node
+    * Checks that the list contains a node
+    * @param node The node
     */
     private boolean contains(DoublyLinkedNode<E> node) {
         DoublyLinkedNode<E> nodeCheck = first;
@@ -108,8 +109,9 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-   Checks that the list contains a node with an element
-   */
+     * Checks that the list contains a node with an element
+     * @param element The element
+     */
     public boolean contains(E element) {
         DoublyLinkedNode<E> nodeCheck = first;
         while (nodeCheck != null) {
@@ -136,7 +138,8 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-    Returns the element in the n position of the list
+     * Returns the element in the n position of the list
+     * @param i The index
      */
     public DoublyLinkedNode<E> get(int i) throws IndexOutOfBoundsException {
         int pos = 0;
@@ -152,7 +155,8 @@ public class DoublyLinkedList<E> {
     }
 
     /*
-    Returns the position of the node in the list
+     * Returns the position of the node in the list
+     * @param node The node
      */
     public int getPos(DoublyLinkedNode<E> n) throws DoublyLinkedListException {
         int pos = 0;
@@ -169,6 +173,10 @@ public class DoublyLinkedList<E> {
 
     public boolean isEmpty() {
         return first == null;
+    }
+
+    public void clear(){
+        first = last = null;
     }
 
     public int size() {

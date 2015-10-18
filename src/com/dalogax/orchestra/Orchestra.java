@@ -40,7 +40,12 @@ public class Orchestra {
             Integer nSits = Integer.parseInt(br.readLine());
             System.out.print("Select a sit: ");
             Integer selectedSit = Integer.parseInt(br.readLine());
-            assignSits(nSits, selectedSit);
+            DoublyLinkedList<Integer> assigned = assignSits(nSits, selectedSit);
+            if (assigned!=null) {
+                System.out.println("Assigned sits: " + assigned.toString());
+            } else {
+                System.out.println("Impossible to find enough correlative sits");
+            }
         } catch (IOException e) {
             System.err.println("ERROR:" + e);
         } catch (DoublyLinkedListException e) {
@@ -48,47 +53,47 @@ public class Orchestra {
         }
     }
 
-    private static void assignSits(Integer nSits, Integer selectedSit) throws DoublyLinkedListException {
+    private static DoublyLinkedList<Integer> assignSits(Integer nSits, Integer selectedSit) throws DoublyLinkedListException {
         DoublyLinkedList<Sit> row = orchestra.get((selectedSit / columns) % rows);
         DoublyLinkedNode<Sit> node = row.get((selectedSit % columns) - 1);
         DoublyLinkedNode<Sit> nodeBack = node;
         DoublyLinkedNode<Sit> nodeForward = node;
         DoublyLinkedList<Integer> assigned = new DoublyLinkedList<Integer>();
-        boolean backBloqued = false;
-        boolean forwardBloqued = false;
+        boolean backBlocked = false;
+        boolean forwardBlocked = false;
         if (!node.getData().isOccupied()) {
             node.getData().setOccupied(true);
             assigned.insertLast(node.getData().getId());
             nSits--;
-            while (nSits > 0 && (!backBloqued || !forwardBloqued)) {
-                if (!backBloqued) {
+            while (nSits > 0 && (!backBlocked || !forwardBlocked)) {
+                if (!backBlocked) {
                     nodeBack = nodeBack.getPrevious();
                     if (nodeBack != null && !nodeBack.getData().isOccupied()) {
                         nodeBack.getData().setOccupied(true);
                         assigned.insertFirst(nodeBack.getData().getId());
                         nSits--;
                     } else {
-                        backBloqued = true;
+                        backBlocked = true;
                     }
                 }
-                if (!forwardBloqued && nSits > 0) {
+                if (!forwardBlocked && nSits > 0) {
                     nodeForward = nodeForward.getNext();
                     if (nodeForward != null && !nodeForward.getData().isOccupied()) {
                         nodeForward.getData().setOccupied(true);
                         assigned.insertLast(nodeForward.getData().getId());
                         nSits--;
                     } else {
-                        forwardBloqued = true;
+                        forwardBlocked = true;
                     }
                 }
             }
             if (nSits == 0) {
-                System.out.println("Assigned sits: " + assigned.toString());
+                return assigned;
             } else {
-                System.out.println("Impossible to find enough correlative sits");
+                return null;
             }
         } else {
-            System.out.println("The selected sit is occupied");
+            return null;
         }
 
     }
@@ -103,11 +108,7 @@ public class Orchestra {
             for (int j = 0; j < columns; j++) {
                 Sit sit = new Sit(randGen.nextBoolean(), id);
                 id++;
-                try {
-                    row.insertLast(sit);
-                } catch (DoublyLinkedListException e) {
-                    System.err.println("ERROR:" + e);
-                }
+                row.insertLast(sit);
             }
             orchestra.add(row);
         }

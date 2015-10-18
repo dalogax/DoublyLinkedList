@@ -43,7 +43,7 @@ public class DoublyLinkedNode<E> {
         this.data = data;
     }
 
-    public DoublyLinkedNode getNext() {
+    public DoublyLinkedNode<E> getNext() {
         return next;
     }
 
@@ -51,7 +51,7 @@ public class DoublyLinkedNode<E> {
         this.next = next;
     }
 
-    public DoublyLinkedNode getPrevious() {
+    public DoublyLinkedNode<E> getPrevious() {
         return previous;
     }
 
@@ -61,6 +61,11 @@ public class DoublyLinkedNode<E> {
 
     @Override
     public String toString() {
-        return data.toString();
+        if (data!=null){
+            return data.toString();
+        }
+        else{
+            return "null";
+        }
     }
 }
