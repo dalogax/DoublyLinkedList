@@ -145,7 +145,7 @@ public class DoublyLinkedList<E> {
         int pos = 0;
         DoublyLinkedNode<E> node = first;
         while (node != null) {
-            if (i == pos) {
+            if (index == pos) {
                 return node;
             }
             pos++;
