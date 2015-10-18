@@ -105,10 +105,24 @@ public class DoublyLinkedList<E> {
     /*
     Checks that the list contains a node
     */
-    public boolean contains(DoublyLinkedNode node){
+    private boolean contains(DoublyLinkedNode node){
         DoublyLinkedNode nodeCheck = first;
         while (nodeCheck!=null){
             if (nodeCheck==node){
+                return true;
+            }
+            nodeCheck=nodeCheck.getNext();
+        }
+        return false;
+    }
+
+    /*
+   Checks that the list contains a node with an element
+   */
+    public boolean contains(E element){
+        DoublyLinkedNode nodeCheck = first;
+        while (nodeCheck!=null){
+            if (nodeCheck.getData().equals(element)){
                 return true;
             }
             nodeCheck=nodeCheck.getNext();

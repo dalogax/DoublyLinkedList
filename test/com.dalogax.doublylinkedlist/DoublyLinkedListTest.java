@@ -1,4 +1,4 @@
-package com.dalogax;
+package com.dalogax.doublylinkedlist;
 
 
 import com.dalogax.doublylinkedlist.DoublyLinkedList;
@@ -206,10 +206,9 @@ public class DoublyLinkedListTest {
             list.insertLast(2);
             list.insertLast(3);
             list.insertLast(4);
-            DoublyLinkedNode node = list.getFirst();
-            assertTrue(list.contains(node));
+            assertTrue(list.contains(1));
             list.removeFirst();
-            assertFalse(list.contains(node));
+            assertFalse(list.contains(6));
         } catch (DoublyLinkedListException e) {
             fail("ERROR:" + e.toString());
         }
